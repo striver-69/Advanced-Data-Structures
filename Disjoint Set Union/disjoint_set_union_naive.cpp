@@ -3,44 +3,50 @@
 using namespace std;
 
 /********  Naive Union-Find Disjoint Set Implementation   *****/
-class UFDS {
+class UFDS
+{
 private:
-	vector<int> parent;
+  vector<int> parent;
   int size;
+
 public:
-  UFDS(int size){
-    this->size=size;
-    this->parent.resize(size+1);
+  UFDS(int size)
+  {
+    this->size = size;
+    this->parent.resize(size + 1);
   }
-	void make_set() {
-		for (int i = 0; i < size; i++)
-			parent[i] = i;
-	}
-	int findSet(int v) {
-		if(v==parent[v])
+  void make_set()
+  {
+    for (int i = 0; i < size; i++)
+      parent[i] = i;
+  }
+  int findSet(int v)
+  {
+    if (v == parent[v])
       return v;
     return findSet(parent[v]);
-	}
-	void unionSet(int a, int b) {
-		a=findSet(a);
-    b=findSet(b);
-    if(a!=b)
-      parent[b]=a;
+  }
+  void unionSet(int a, int b)
+  {
+    a = findSet(a);
+    b = findSet(b);
+    if (a != b)
+      parent[b] = a;
   }
 };
 
 int main()
 {
   //Sample Usage
-  UFDS*uf=new UFDS(5);
+  UFDS *uf = new UFDS(5);
   uf->make_set();
-  uf->unionSet(1,2);
-  uf->unionSet(3,4);
-  uf->unionSet(1,3);
-  uf->unionSet(0,1);  
-  for(int i=0;i<5;i++)
+  uf->unionSet(1, 2);
+  uf->unionSet(3, 4);
+  uf->unionSet(1, 3);
+  uf->unionSet(0, 1);
+  for (int i = 0; i < 5; i++)
   {
-    cout<<uf->findSet(i)<<endl;
+    cout << uf->findSet(i) << endl;
   }
   return 0;
 }
